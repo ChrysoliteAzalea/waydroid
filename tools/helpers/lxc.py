@@ -247,6 +247,9 @@ def make_base_props(args):
     egl = tools.helpers.props.host_get(args, "ro.hardware.egl")
     dri, _ = tools.helpers.gpu.getDriNode(args)
 
+    # Avoid enabling ADB by default
+    props.append("ro.debuggable=0")
+
     gralloc = find_hal("gralloc")
     if not gralloc:
         if find_hidl("android.hardware.graphics.allocator@4.0::IAllocator/default"):
